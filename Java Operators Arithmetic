@@ -1,0 +1,22 @@
+class Solution
+{
+    public double[]  FindRoots(int A, int B, int C)
+    {
+        double D = (B * B) - (4*A*C);
+        double R = Math.sqrt(D);
+        double R1 = ((-1 * B) + R)/(2*A);
+        double R2 = ((-1 * B) - R)/(2*A);
+        if(D < 0) return new double[]{-1d};
+        
+        double[] roots = new double[2];
+        if(R1>R2)
+        {
+            roots[0]=R2;
+            roots[1]=R1;
+        }else{
+            roots[1]=R2;
+            roots[0]=R1;
+        }
+        return roots;
+    }
+}
