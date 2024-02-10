@@ -1,0 +1,12 @@
+class Solution
+{
+    //Function to check if two strings are rotations of each other or not.
+    public static boolean areRotations(String s1, String s2 )
+    {
+        StringBuilder str = new StringBuilder();
+        str.append(s1);
+        str.append(s1);
+        return str.lastIndexOf(s2)>=0?true:false;
+    }
+    
+}
