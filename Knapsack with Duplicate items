@@ -1,0 +1,17 @@
+class Solution{
+    static int knapSack(int N, int W, int val[], int wt[])
+    {
+        int[][]sol = new int[N+1][W+1];
+        for(int i = 1; i <=N ; i++)
+            for(int j = 0 ; j<=W ; j++)
+            {
+                if(wt[i-1] <= j)
+                {
+                    sol[i][j] = Math.max(sol[i-1][j], val[i-1]+sol[i][j-wt[i-1]]);
+                }
+                else sol[i][j] = sol[i-1][j];
+            }
+        
+        return sol[N][W];
+    }
+}
