@@ -1,0 +1,27 @@
+class Solution 
+{
+    //Function to find minimum number of attempts needed in 
+    //order to find the critical floor.
+    static int eggDrop(int n, int k) 
+	{
+	     int sol[][]=new int[n+1][k+1];
+       
+        for(int j=1;j<k+1;j++)
+        {
+            sol[1][j]=j;
+        }
+        for(int i=2;i<n+1;i++)
+        {
+            for(int j=1;j<k+1;j++)
+            {
+                int min=Integer.MAX_VALUE;
+                for(int mj=j-1,pj=0;mj>=0;pj++,mj--)
+                {
+                min=Math.min(min,1+ Math.max(sol[i][mj],sol[i-1][pj]));       
+                }
+                sol[i][j]=min;
+            }
+        }
+        return sol[n][k];
+	}
+}
