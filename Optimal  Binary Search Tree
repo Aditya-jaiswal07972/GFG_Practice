@@ -31,36 +31,35 @@ class Solution
 {
     static int optimalSearchTree(int keys[], int freq[], int n)
     {
-        Integer sol[][][] = new Integer[n][n][n+1];
-      
-        return fun(keys,freq,0,n-1,1,sol);
-    }
-    static int fun(int arr[],int freq[], int i, int j,int level,Integer sol[][][])
-    {
-        if(i>j)return 0;
-       
-        if(i==j) return level*freq[i];
-        
-        if(sol[i][j][level] != null)
-        {
-            return sol[i][j][level];
+       int[][] dp = new int[n][n];
+        int[] sum = new int[n]; 
+        sum[0] = freq[0];
+        for(int i = 1;i<n;i++){
+            sum[i]=sum[i-1]+freq[i];
         }
-        
-        int min = Integer.MAX_VALUE;
-        
-        for(int k=i ; k<=j ; k++)
-        {
-            int left = fun(arr,freq,i,k-1,level+1,sol);
-          
-            int right = fun(arr,freq,k+1,j,level+1,sol);
-          
-            int frequency = freq[k]*level;  
-          
-            int total = left+right+frequency;
-	      
-	        min = Math.min(total,min);
-	    }
-	    return sol[i][j][level]= min;
+        for(int g = 0;g<n;g++){
+            for(int i = 0,j = g;j<n;j++,i++){
+                if(g==0){
+                    dp[i][j] = freq[j];
+                }else if(g==1){
+                    dp[i][j] = Math.min(freq[i]+freq[j]*2,freq[i]*2+freq[j]);
+                }else{
+                    int prifix = i-1<0? 0:sum[i-1];
+                    int freqS = sum[j]-prifix;
+                    
+                    int min = Integer.MAX_VALUE;
+                    for(int k = i;k<=j;k++){
+                        int left = k==i? 0 :dp[i][k-1];
+                        int right =k==j?0: dp[k+1][j];
+                        if(left+right+freqS<min){
+                            min = left+right+freqS;
+                        }
+                    }
+                    dp[i][j] = min;
+                }
+            }
+        }
+        return dp[0][n-1];
     }
 }
 
