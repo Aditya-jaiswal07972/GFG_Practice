@@ -1,0 +1,13 @@
+class Solution {
+    public static void convertToWave(int n, int[] a) {
+        for(int i=1; i<n; i+=2)
+        {
+            int small = a[i-1];
+            int large = a[i];
+            
+            a[i] = small;
+            a[i-1] = large;
+        }
+    }
+}
+        
