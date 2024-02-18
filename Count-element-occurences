@@ -1,6 +1,6 @@
 class Solution 
 {
-    //Function to find all elements in array that appear more than n/k times.
+   
     public int countOccurence(int[] arr, int n, int k) 
     {
         HashMap<Integer,Integer>map = new HashMap<>();
