@@ -1,2 +1,2 @@
 # GFG_Practice
-Repository for gf practice code
+Repository for gfg practice code
